@@ -38,7 +38,7 @@ public class EventPage {
     @FindBy(linkText = "Quotes")
     public WebElement quotes;
 
-    @FindBy(linkText = "Quote.docx")
+    @FindBy(xpath = "//a[@class='bx-file-dialog-content-link bx-file-dialog-icon bx-file-dialog-icon-file']")
     public WebElement quotesFile;
 
     @FindBy(xpath = "//span[@class='popup-window-button popup-window-button-accept']")
@@ -73,6 +73,9 @@ public class EventPage {
 
     @FindBy(xpath = "(//iframe[@class='bx-editor-iframe'])[2]")
     public WebElement iframe;
+
+    @FindBy(xpath = "//blockquote[@class='bxhtmled-quote']")
+    public WebElement yellowArea;
 
     @FindBy(xpath = "(//span[@title='Visual editor'])[2]")
     public WebElement visualEditor;

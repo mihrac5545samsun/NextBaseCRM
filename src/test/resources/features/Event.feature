@@ -17,7 +17,7 @@ Feature: Event
     Then User clicks upload files and images
     Then User clicks download from external drive
     Then User clicks select document from Bitrix24
-    Then User clicks create using desktop applications
+    Then User clicks create using Google Docs
 
   Scenario: User attaches link
     Given User clicks Link
@@ -30,21 +30,20 @@ Feature: Event
     Then User puts the URL of the video
     Then User clicks Save for the video
 
-  Scenario: User creates a quote
-    Given User clicks Quote Text
-    Then User types in the yellow area
-
   Scenario: User opens Visual Editor
     Given User clicks Visual Editor
     Then User chooses bold
     Then User chooses italic
 
+  Scenario: User creates a quote
+    Given User clicks Quote Text
+    Then User types in the yellow area
+
+
   Scenario: User chooses event start and end time
     Given User changes event start and end time
     Then User changes start date to July 24th
-    Then User keeps the start time same
     Then User changes end date to July 27th
-    Then User keeps the end time same
     Then User chooses America Costa_Rica time zone for start
 
   Scenario: User sets a reminder

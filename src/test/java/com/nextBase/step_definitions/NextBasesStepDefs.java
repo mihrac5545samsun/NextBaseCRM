@@ -6,7 +6,13 @@ import com.nextBase.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NextBasesStepDefs {
     LoginPage loginPage = new LoginPage();
@@ -53,7 +59,12 @@ public class NextBasesStepDefs {
     @Then("User clicks upload files and images")
     public void user_clicks_upload_files_and_images() throws InterruptedException {
         Thread.sleep(2000);
-        eventPage.localDisk.sendKeys("C:/Users/mfaik/Desktop/peel.jpg");
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15, 100);
+        WebElement uploadFileElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@type='file'])[3]")));
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].style.left='0'", uploadFileElement);
+        uploadFileElement.sendKeys("C:/Users/mfaik/Desktop/peel.jpg");
+        Thread.sleep(2000);
     }
 
     @Then("User clicks download from external drive")
@@ -74,10 +85,9 @@ public class NextBasesStepDefs {
         eventPage.selectDocument.click();
     }
 
-    @Then("User clicks create using desktop applications")
-    public void user_clicks_create_using_desktop_applications() throws InterruptedException {
-        System.out.println("I don't know how to do this");
-        Thread.sleep(1500);
+    @Then("User clicks create using Google Docs")
+    public void userClicksCreateUsingGoogleDocs() {
+        System.out.println("Bug");
     }
 
     @Given("User clicks Link")
@@ -122,16 +132,6 @@ public class NextBasesStepDefs {
         Thread.sleep(1500);
     }
 
-    @Given("User clicks Quote Text")
-    public void user_clicks_quote_text() {
-        eventPage.quoteText.click();
-    }
-
-    @Then("User types in the yellow area")
-    public void user_types_in_the_yellow_area() {
-        System.out.println("I don't know how to do this");
-    }
-
     @Given("User clicks Visual Editor")
     public void user_clicks_visual_editor() {
         eventPage.visualEditor.click();
@@ -150,6 +150,19 @@ public class NextBasesStepDefs {
         Thread.sleep(1500);
     }
 
+    @Given("User clicks Quote Text")
+    public void user_clicks_quote_text() {
+        eventPage.quoteText.click();
+    }
+
+    @Then("User types in the yellow area")
+    public void user_types_in_the_yellow_area() {
+        Driver.getDriver().switchTo().frame(eventPage.iframe);
+        eventPage.yellowArea.sendKeys("“Whatever you do in this life, it’s not legendary unless your friends are there to see it.” — Barney Stinson");
+        Driver.getDriver().switchTo().parentFrame();
+    }
+
+
     @Given("User changes event start and end time")
     public void user_changes_event_start_and_end_time() {
         System.out.println();
@@ -162,20 +175,10 @@ public class NextBasesStepDefs {
         Thread.sleep(1500);
     }
 
-    @Then("User keeps the start time same")
-    public void user_keeps_the_start_time_same() {
-        System.out.println();
-    }
-
     @Then("User changes end date to July 27th")
     public void user_changes_end_date_to_july_27th() {
         eventPage.dateTo.click();
         eventPage.twentySeventh.click();
-    }
-
-    @Then("User keeps the end time same")
-    public void user_keeps_the_end_time_same() {
-        System.out.println();
     }
 
     @Then("User chooses America Costa_Rica time zone for start")
@@ -205,7 +208,7 @@ public class NextBasesStepDefs {
 
     @Then("User chooses West Meeting Room")
     public void user_chooses_west_meeting_room() {
-        System.out.println("I don't know how to do this");
+        eventPage.eventLocation.sendKeys("West Meeting Room" + Keys.ESCAPE);
     }
 
     @Given("User clicks Add")
@@ -263,4 +266,6 @@ public class NextBasesStepDefs {
     public void user_clicks_send() {
         eventPage.send.click();
     }
+
+
 }
